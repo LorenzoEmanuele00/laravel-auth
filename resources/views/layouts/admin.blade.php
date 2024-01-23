@@ -60,7 +60,7 @@
                             <li class="nav-item">
                                 <a class="nav-link text-white {{ Route::currentRouteName() == 'admin.dashboard' ? 'bg-secondary' : '' }}"
                                     href="{{ route('admin.dashboard') }}">
-                                    <i class="fa-solid fa-file-code fa-lg fa-fw"></i> DashBoard
+                                    <i class="fa-solid fa-gauge-high fa-lg fa-fw"></i> DashBoard
                                 </a>
                             </li>
                             <li class="nav-item">
