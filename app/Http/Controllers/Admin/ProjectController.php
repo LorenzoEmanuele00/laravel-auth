@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Models\Project;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
@@ -41,8 +42,8 @@ class ProjectController extends Controller
     {
         $form_data = $request->validated();
         $new_project = new Project();
+        // $new_project->setTitleAttributes($form_data['title']);
         $new_project->fill($form_data);
-        $new_project->slug = Str::slug($new_project->title, '-');
         $new_project->save();
 
         return redirect()->route('admin.projects.show', ['project' => $new_project->slug]);
@@ -54,33 +55,36 @@ class ProjectController extends Controller
      * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function show($slug)
+    public function show(Project $project)
     {
-        $project = Project::where('slug', $slug)->first();
+        // $project = Project::where('slug', $slug)->first();
         return view('admin.projects.show', compact('project'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        // $project = Project::where('slug', $slug)->first();
+        return view('admin.projects.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Project  $project
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $form_data = $request->validated();
+        $project->update($form_data);
+        return redirect()->route('admin.projects.show', ['project' => $project->slug]);
     }
 
     /**
