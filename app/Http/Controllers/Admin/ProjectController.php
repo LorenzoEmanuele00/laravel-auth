@@ -19,6 +19,7 @@ class ProjectController extends Controller
     public function index()
     {
         $projects = Project::all();
+
         return view('admin.projects.index', compact('projects'));
     }
 
@@ -84,6 +85,7 @@ class ProjectController extends Controller
     {
         $form_data = $request->validated();
         $project->update($form_data);
+
         return redirect()->route('admin.projects.show', ['project' => $project->slug]);
     }
 
@@ -93,8 +95,10 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
-        //
+        $project->delete();
+
+        return redirect()->route('admin.projects.index')->with('message', 'Eliminazione di ' . $project->title . ' completata');
     }
 }

@@ -3,8 +3,14 @@
 @section('content')
     <div class="container">
 
+        @if (Session::has('message'))
+            <div class="alert alert-success w-50 mx-auto my-2">
+                {{ Session::get('message') }}
+            </div>
+        @endif
+
         <div class="text-end my-3">
-            <a class="btn btn-success" href="{{route('admin.projects.create')}}">New Project</a>
+            <a class="btn btn-primary" href="{{route('admin.projects.create')}}">New Project</a>
         </div>
         @if (count($projects) > 0)
             <table class="table table-striped border border-2">
@@ -23,11 +29,11 @@
                             <td>
                                 <a class="btn btn-success" href="{{ route('admin.projects.show', ['project' => $project->slug]) }}"><i class="fa-solid fa-info"></i></a>
                                 <a class="btn btn-warning" href="{{ route('admin.projects.edit', ['project' => $project->slug]) }}"><i class="fa-solid fa-pencil"></i></a>
-                                {{-- <form action="{{ route('projects.destroy', ['project' => $project->id]) }}"" class="d-inline-block" method="POST">
+                                <form action="{{ route('admin.projects.destroy', ['project' => $project->slug]) }}" class="d-inline-block" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn btn-danger" type="submit"><i class="fa-regular fa-trash-can"></i></button>
-                                </form>  --}}
+                                </form>
                             </td>
                         </tr>
                     @endforeach
