@@ -53,7 +53,7 @@ class ProjectController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  string  $slug
+     * @param  Project  $project
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project)
@@ -65,7 +65,7 @@ class ProjectController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  string  $slug
+     * @param  Project  $project
      * @return \Illuminate\Http\Response
      */
     public function edit(Project $project)
@@ -92,7 +92,7 @@ class ProjectController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Project  $project
      * @return \Illuminate\Http\Response
      */
     public function destroy(Project $project)
